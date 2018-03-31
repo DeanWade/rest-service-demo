@@ -10,18 +10,18 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 @RestController
-@RequestMapping(value="/consumer")
+@RequestMapping(value="/consumer/customer")
 public class CustomerController {
 
     @Autowired
     private CustomerService customerService;
 
-    @GetMapping("/customer/all")
+    @GetMapping("/all")
     public List<Customer> getCustomers(){
         return customerService.getCustomers();
     }
 
-    @GetMapping("/customer/random")
+    @GetMapping("/random")
     public Customer randomCustomer() throws Exception{
         return new Customer();
     }

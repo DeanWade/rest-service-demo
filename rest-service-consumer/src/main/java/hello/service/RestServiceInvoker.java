@@ -41,12 +41,11 @@ public class RestServiceInvoker {
 			return doInAsync(restServiceConfig);
 		}else{
 			if(restServiceConfig.isLock()){
-				doInLock();
+				return doInLock();
 			}else {
 				return doGreeting();
 			}
 		}
-        return doGreeting();
 	}
 
 	public Greeting doInAsync(RestServiceConfig restServiceConfig){

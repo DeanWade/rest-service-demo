@@ -32,8 +32,6 @@ public class ConsumerController {
 	@Autowired
 	private RestServiceInvoker invoker;
 	
-
-
 	@GetMapping("/greeting")
 	public Greeting greeting(
 			@RequestParam(value = "name", defaultValue = "World") String name,
@@ -46,7 +44,7 @@ public class ConsumerController {
 	}
 	
 	@GetMapping("/greeting2")
-	public Greeting greeting(
+	public Greeting greeting2(
     		@RequestParam(value="name", defaultValue="World") String name,
     		@RequestParam(value="lock", defaultValue="lock") boolean lock) {
         RestServiceConfig restServiceConfig = new RestServiceConfig();
@@ -54,13 +52,10 @@ public class ConsumerController {
         return invoker.greeting(restServiceConfig);
 	}
 	
-
-	
     @GetMapping("/exception")
     public Object exception() {
     	return invoker.exception();
     }
-	
 	
 	@GetMapping("/random")
 	public Greeting randomUriPath() {

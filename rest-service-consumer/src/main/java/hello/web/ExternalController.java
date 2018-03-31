@@ -7,14 +7,14 @@ import org.springframework.web.client.RestTemplate;
 import java.io.IOException;
 
 @RestController
-@RequestMapping(value = "/consumer/external")
+@RequestMapping(value = "/consumer")
 public class ExternalController {
 
     @Autowired
     private RestTemplate restTemplate;
 
-    @GetMapping("/{path}")
-    protected String ip(@PathVariable String path,
+    @GetMapping("/external/{path}")
+    protected String ip(@PathVariable(required=false) String path,
                         @RequestParam(value = "wait", defaultValue = "100") int waitTime) throws IOException {
         try {
             Thread.sleep(waitTime);
