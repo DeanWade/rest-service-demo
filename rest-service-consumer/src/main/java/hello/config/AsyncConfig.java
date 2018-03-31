@@ -17,7 +17,7 @@ public class AsyncConfig {
         executor.setCorePoolSize(10);
         executor.setMaxPoolSize(20);
         executor.setQueueCapacity(50);
-        executor.setThreadNamePrefix("ProviderService-");
+        executor.setThreadNamePrefix("RestService-");
         executor.initialize();
         return executor;
     }

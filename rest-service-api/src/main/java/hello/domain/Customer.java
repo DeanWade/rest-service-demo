@@ -1,8 +1,12 @@
 package hello.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import java.io.Serializable;
 import java.util.UUID;
 
-public class Customer{
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class Customer implements Serializable {
 	
 	private String id;
 

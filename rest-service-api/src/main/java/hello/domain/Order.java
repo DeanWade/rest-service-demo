@@ -69,6 +69,14 @@ public class Order implements Serializable {
 		this.result = result;
 	}
 
-	
-
+	@Override
+	public String toString() {
+		return "Order{" +
+				"transaction='" + transaction + '\'' +
+				", channel='" + channel + '\'' +
+				", product='" + product + '\'' +
+				", amount=" + amount +
+				", result=" + result +
+				'}';
+	}
 }

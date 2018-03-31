@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 @Service
-public class OrderServiceImpl implements OrderService {
+public class OrderServiceInvoker implements OrderService {
 
 	private static String[] tansactionCode = { "AddToCart", "Checkout", "ConfirmOrder", "DoPayment", "ViewOrder" };
 	
@@ -21,7 +21,7 @@ public class OrderServiceImpl implements OrderService {
 	private RestTemplate restTemplate;
 	
 	@Override
-	public boolean order(String transaction, String channel, String product, int amount) {
+	public Order order(String transaction, String channel, String product, int amount) {
 		Order order = null;
 		if(transaction == null){
 			order = randomOrder();
@@ -30,7 +30,7 @@ public class OrderServiceImpl implements OrderService {
 		}
 		doOrder(order.getTransaction(), order.getChannel(), order.getProduct(), order.getAmount(), order.isResult());
 		order = doRemoteOrder(order);
-		return order.isResult();
+		return order;
 	}
 
 	public boolean doOrder(String transaction, String channel, String product, int amount, boolean result) {

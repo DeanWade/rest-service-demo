@@ -1,10 +1,10 @@
 package hello.repository;
 
+import hello.domain.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import hello.domain.Customer;
 import hello.domain.CustomerJPA;
 
 @Component

@@ -2,8 +2,10 @@ package hello.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.io.Serializable;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Greeting {
+public class Greeting implements Serializable {
 
     private Long id;
     private String content;

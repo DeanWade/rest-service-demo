@@ -14,12 +14,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value="/session")
+@RequestMapping(value="/consumer")
 public class SessionController {
 
 	private static final Logger logger = LoggerFactory.getLogger(ConsumerController.class);
 	
-	@GetMapping("/")
+	@GetMapping("/session")
 	protected String session(HttpServletRequest req, HttpServletResponse resp,
 			@RequestParam(value = "name", required = false) String name)
 			throws ServletException, IOException {

@@ -24,11 +24,11 @@ public class OrderController {
 	private OrderService orderService;
 
 	@GetMapping("/transaction")
-	protected boolean transaction(
+	protected Order transaction(
 			@RequestParam(value = "transaction", required=false) String transaction,
 			@RequestParam(value = "channel", required=false) String channel,
 			@RequestParam(value = "product", required=false) String product,
-			@RequestParam(value = "amount", required=false, defaultValue="0") Integer amount) throws ServletException, IOException {
+			@RequestParam(value = "amount", required=false, defaultValue="0") int amount) throws ServletException, IOException {
 		return orderService.order(transaction, channel, product, amount);
 	}
 	

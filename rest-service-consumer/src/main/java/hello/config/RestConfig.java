@@ -14,8 +14,9 @@ public class RestConfig {
 	
 	@Value("${rest.read.timeout}")
 	private int readTimeout;
-	
-	private int connectionRequestTimeout = 1000;
+
+	@Value("${rest.connection.request.timeout}")
+	private int connectionRequestTimeout;
 
 	@Bean
 	public RestTemplate restTemplate() {

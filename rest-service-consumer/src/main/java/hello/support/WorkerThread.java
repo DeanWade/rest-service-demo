@@ -1,5 +1,7 @@
 package hello.support;
 
+import hello.service.RestServiceInvoker;
+
 public class WorkerThread extends Thread{
 
 	private final RestServiceInvoker restServiceInvoker;
@@ -8,9 +10,10 @@ public class WorkerThread extends Thread{
 	
 	private final Object monitor = new Object();
 
-	public WorkerThread(RestServiceInvoker restServiceInvoker) {
+	public WorkerThread(RestServiceInvoker restServiceInvoker, boolean daemon) {
 		this.restServiceInvoker = restServiceInvoker;
 		this.setName(this.getClass().getSimpleName());
+		this.setDaemon(daemon);
 	}
 
 	public Object sendAndWait() {
@@ -38,7 +41,7 @@ public class WorkerThread extends Thread{
 	@Override
 	public void run() {
 		try{
-			this.result = restServiceInvoker.doGreet();
+			this.result = restServiceInvoker.doGreeting();
 		}finally{
 			notifyResult();
 		}
