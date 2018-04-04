@@ -1,14 +1,11 @@
 package hello.service;
 
-import com.google.common.collect.Lists;
+import hello.domain.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import hello.domain.Customer;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -26,7 +23,7 @@ public class CustomerServiceInvoker implements CustomerService{
 	@Override
 	public List<Customer> getCustomers() {
 		String url = "http://localhost:8090/provider/customer/all";
-		return restTemplate.getForObject(url, new ArrayList<Customer>().getClass());
+		return restTemplate.getForObject(url, List.class);
 	}
 
     @Override

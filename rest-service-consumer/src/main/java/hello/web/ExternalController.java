@@ -10,7 +10,7 @@ import java.io.IOException;
 @RequestMapping(value = "/consumer")
 public class ExternalController {
 
-    @Autowired
+    @Autowired(required=false)
     private RestTemplate restTemplate;
 
     @GetMapping("/external/{path}")

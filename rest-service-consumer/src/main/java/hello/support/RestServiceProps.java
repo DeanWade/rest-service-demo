@@ -1,17 +1,17 @@
 package hello.support;
 
-public class RestServiceConfig {
+public class RestServiceProps {
     private boolean daemon;
 
     private boolean async;
 
     private boolean lock;
 
-    public RestServiceConfig(){
+    public RestServiceProps(){
 
     }
 
-    public RestServiceConfig(boolean daemon, boolean async, boolean lock) {
+    public RestServiceProps(boolean daemon, boolean async, boolean lock) {
         this.daemon = daemon;
         this.async = async;
         this.lock = lock;

@@ -13,7 +13,7 @@ import java.util.concurrent.CompletableFuture;
 @RequestMapping(value="/consumer/customer")
 public class CustomerController {
 
-    @Autowired
+    @Autowired(required=false)
     private CustomerService customerService;
 
     @GetMapping("/all")

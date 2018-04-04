@@ -5,7 +5,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantLock;
 
 import hello.MyException;
-import hello.support.RestServiceConfig;
+import hello.support.RestServiceProps;
 import hello.support.WorkerThread;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -36,11 +36,11 @@ public class RestServiceInvoker {
 		return restTemplate.getForObject(url, Object.class);
 	}
 
-	public Greeting greeting(RestServiceConfig restServiceConfig){
-		if(restServiceConfig.isAsync()){
-			return doInAsync(restServiceConfig);
+	public Greeting greeting(RestServiceProps restServiceProps){
+		if(restServiceProps.isAsync()){
+			return doInAsync(restServiceProps);
 		}else{
-			if(restServiceConfig.isLock()){
+			if(restServiceProps.isLock()){
 				return doInLock();
 			}else {
 				return doGreeting();
@@ -48,8 +48,8 @@ public class RestServiceInvoker {
 		}
 	}
 
-	public Greeting doInAsync(RestServiceConfig restServiceConfig){
-		WorkerThread worker = new WorkerThread(this, restServiceConfig.isDaemon());;
+	public Greeting doInAsync(RestServiceProps restServiceProps){
+		WorkerThread worker = new WorkerThread(this, restServiceProps.isDaemon());;
 		return (Greeting) worker.sendAndWait();
 	}
 

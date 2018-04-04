@@ -3,6 +3,7 @@ package hello.service;
 import hello.domain.Order;
 import org.apache.commons.lang.math.RandomUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -17,8 +18,11 @@ public class OrderServiceInvoker implements OrderService {
 	
 	private static Boolean[] results = { Boolean.TRUE, Boolean.TRUE, Boolean.TRUE, Boolean.TRUE, Boolean.TRUE, Boolean.TRUE,Boolean.FALSE };
 
-	@Autowired
+	@Autowired(required=false)
 	private RestTemplate restTemplate;
+
+	@Autowired(required=false)
+	private JmsTemplate jmsTemplate;
 	
 	@Override
 	public Order order(String transaction, String channel, String product, int amount) {
@@ -30,6 +34,19 @@ public class OrderServiceInvoker implements OrderService {
 		}
 		doOrder(order.getTransaction(), order.getChannel(), order.getProduct(), order.getAmount(), order.isResult());
 		order = doRemoteOrder(order);
+		return order;
+	}
+
+	@Override
+	public Order orderWithJms(String transaction, String channel, String product, int amount) {
+		Order order = null;
+		if(transaction == null){
+			order = randomOrder();
+		}else{
+			order = new Order(transaction, channel, product, amount, results[RandomUtils.nextInt(7)]);
+		}
+		doOrder(order.getTransaction(), order.getChannel(), order.getProduct(), order.getAmount(), order.isResult());
+		doJmsOrder(order);
 		return order;
 	}
 
@@ -65,6 +82,10 @@ public class OrderServiceInvoker implements OrderService {
 		String url = "http://localhost:8090/provider/order/transaction";
 		Order result = restTemplate.postForObject(url, order, Order.class);
         return result;
+	}
+
+	public void doJmsOrder(Order order) {
+		jmsTemplate.convertAndSend("order.transaction", order);
 	}
 
 }
